@@ -1,0 +1,10 @@
+node_modules
+dist
+
+Dockerfile
+README.md
+package-lock.json
+.git
+.yarn
+.dockerignore
+.gitignore
