@@ -1,5 +1,5 @@
 #  enviorinment execution application
-FROM node:18-slim
+FROM node:18-alpine3.19
 
 WORKDIR /usr/src/app
 
