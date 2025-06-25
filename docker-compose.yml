@@ -1,0 +1,37 @@
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=rocketseat-db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=root
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - primeira-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 3s
+      timeout: 3s
+      retries: 3
+  api:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - primeira-network
+
+volumes:
+  mysql_data:
+
+networks:
+  primeira-network:
+    driver: bridge
